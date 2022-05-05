@@ -1,1 +1,59 @@
-<p>login-page works!</p>
+<form class="card" [formGroup]="form" (ngSubmit)="submit()">
+  <h2>Login to the admin panel</h2>
+  <div class="alert alert-danger" *ngIf="auth.errors$ | async as error">
+    {{ error }}
+  </div>
+  <div class="alert alert-info" *ngIf="message">
+    {{ message }}
+  </div>
+  <div
+    [ngClass]="{
+      invalid: isFieldInvalid(emailField)
+    }"
+    class="form-control"
+  >
+    <label for="email">Email:</label>
+    <input formControlName="email" type="email" name="email" id="email" />
+    <div *ngIf="isFieldInvalid(emailField)" class="validation">
+      <small *ngIf="getFieldErrorValue(emailField, 'required')">
+        Please enter an email
+      </small>
+      <small *ngIf="getFieldErrorValue(emailField, 'email')">
+        Incorrect email
+      </small>
+    </div>
+  </div>
+  <div
+    [ngClass]="{
+      invalid: isFieldInvalid(passwordField)
+    }"
+    class="form-control"
+  >
+    <label for="password">Password:</label>
+    <input
+      formControlName="password"
+      type="password"
+      name="password"
+      id="password"
+    />
+    <div *ngIf="isFieldInvalid(passwordField)" class="validation">
+      <small *ngIf="getFieldErrorValue(passwordField, 'required')">
+        Please enter a password
+      </small>
+      <small *ngIf="getFieldErrorValue(passwordField, 'minlength')">
+        Password must have
+        {{ getFieldErrorValue(passwordField, "minlength")["requiredLength"] }}
+        symbols. It's
+        {{ getFieldErrorValue(passwordField, "minlength")["actualLength"] }}
+        now.
+      </small>
+    </div>
+  </div>
+  <button
+    class="btn btn-primary"
+    type="submit"
+    [disabled]="form.invalid || submitted"
+  >
+    Login
+  </button>
+</form>
