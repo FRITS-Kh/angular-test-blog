@@ -1,0 +1,15 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h1 {
+  margin-bottom: 0.5em;
+}
+
+.info {
+  strong {
+    margin-right: 1rem;
+  }
+}
