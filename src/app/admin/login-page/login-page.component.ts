@@ -36,6 +36,10 @@ export class LoginPageComponent implements OnInit {
       if (params['loginAgain']) {
         this.message = 'Please login';
       }
+
+      if (params['authFailed']) {
+        this.message = 'Session expired';
+      }
     });
   }
 

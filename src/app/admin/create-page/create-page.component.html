@@ -1,1 +1,55 @@
-<p>create-page works!</p>
+<form class="card" [formGroup]="form" (ngSubmit)="submit()">
+  <h1>Create post</h1>
+  <div
+    [ngClass]="{
+      invalid: isFieldInvalid(titleField)
+    }"
+    class="form-control"
+  >
+    <label for="title">Post title:</label>
+    <input formControlName="title" type="text" name="title" id="title" />
+    <div *ngIf="isFieldInvalid(titleField)" class="validation">
+      <small *ngIf="getFieldErrorValue(titleField, 'required')">
+        Please enter a post title
+      </small>
+    </div>
+  </div>
+
+  <div
+    [ngClass]="{
+      invalid: isFieldInvalid(textField)
+    }"
+    class="form-control"
+  >
+    <label for="">Post content:</label>
+    <quill-editor formControlName="text"></quill-editor>
+    <div *ngIf="isFieldInvalid(textField)" class="validation">
+      <small *ngIf="getFieldErrorValue(textField, 'required')">
+        Please enter a post title
+      </small>
+    </div>
+  </div>
+
+  <div
+    [ngClass]="{
+      invalid: isFieldInvalid(authorField)
+    }"
+    class="form-control"
+  >
+    <label for="author">Post author:</label>
+    <input formControlName="author" type="text" name="author" id="author" />
+    <div *ngIf="isFieldInvalid(authorField)" class="validation">
+      <small *ngIf="getFieldErrorValue(authorField, 'required')">
+        Please enter an author
+      </small>
+    </div>
+  </div>
+
+  <button
+    type="submit"
+    class="btn btn-block btn-dark"
+    [disabled]="form.invalid"
+  >
+    Create a post
+  </button>
+</form>
