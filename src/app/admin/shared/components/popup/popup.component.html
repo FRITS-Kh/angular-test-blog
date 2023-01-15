@@ -1,0 +1,12 @@
+<div class="wrapper" *ngIf="text">
+  <div class="content">
+    <h4 *ngIf="title">{{ title }}</h4>
+    <p>{{ text }}</p>
+    <div class="actions">
+      <button class="btn btn-{{ type }}" type="button" (click)="onConfirm()">
+        {{ confirmButtonText }}
+      </button>
+      <button class="btn" type="button" (click)="onCancel()">Cancel</button>
+    </div>
+  </div>
+</div>

@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { of, Subscription, switchMap, take } from 'rxjs';
 import { Post } from 'src/app/shared/interfaces';
 import { PostsService } from 'src/app/shared/posts.service';
 import { AlertService } from '../shared/services/alert.service';
+import { PopupService, Popup } from '../shared/services/popup.service';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -17,7 +18,8 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
 
   constructor(
     private postsService: PostsService,
-    private alert: AlertService
+    private alert: AlertService,
+    private popupService: PopupService
   ) {}
 
   ngOnInit(): void {
@@ -26,13 +28,32 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
     });
   }
 
-  remove(id: string): void {
-    this.removeSubscription = this.postsService.remove(id).subscribe({
-      next: () => {
-        this.posts = this.posts.filter((post) => post.id !== id);
-        this.alert.warning('Post was removed');
-      },
-    });
+  remove(id: string, title?: string): void {
+    const popupConfig: Popup = {
+      type: 'danger',
+      text: `Do you want to remove the ${title ? `"${title}"` : ''} post?`,
+      confirmButtonText: 'Remove',
+    };
+    const isConfirmed = false;
+
+    this.removeSubscription = this.popupService
+      .open(popupConfig)
+      .pipe(
+        take(1),
+        switchMap((result) =>
+          result ? this.postsService.remove(id) : of(isConfirmed)
+        )
+      )
+      .subscribe({
+        next: (result) => {
+          if (result === isConfirmed) {
+            return;
+          }
+
+          this.posts = this.posts.filter((post) => post.id !== id);
+          this.alert.warning('Post was removed');
+        },
+      });
   }
 
   ngOnDestroy(): void {

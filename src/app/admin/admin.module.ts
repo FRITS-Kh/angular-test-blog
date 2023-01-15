@@ -12,6 +12,8 @@ import { AuthGuard } from './shared/services/auth.guard';
 import { SearchPipe } from './shared/search.pipe';
 import { AlertComponent } from './shared/components/alert/alert.component';
 import { AlertService } from './shared/services/alert.service';
+import { PopupComponent } from './shared/components/popup/popup.component';
+import { PopupService } from './shared/services/popup.service';
 
 @NgModule({
   imports: [
@@ -61,7 +63,8 @@ import { AlertService } from './shared/services/alert.service';
     EditPageComponent,
     SearchPipe,
     AlertComponent,
+    PopupComponent,
   ],
-  providers: [AuthGuard, AlertService],
+  providers: [AuthGuard, AlertService, PopupService],
 })
 export class AdminModule {}

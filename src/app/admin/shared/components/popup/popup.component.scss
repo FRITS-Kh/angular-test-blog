@@ -1,0 +1,32 @@
+.wrapper {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content {
+  background: #fff;
+  min-width: 400px;
+  max-width: 100%;
+  box-shadow: 0 0 1.25rem #ccc;
+  padding: 1rem;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.btn {
+  min-width: 45%;
+  margin: 0;
+}
