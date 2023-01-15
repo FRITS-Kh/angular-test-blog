@@ -1,39 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import {
-  AbstractControl,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Post } from 'src/app/shared/interfaces';
 import { PostsService } from 'src/app/shared/posts.service';
 import { AlertService } from '../shared/services/alert.service';
+import { FieldType } from '../shared/types';
+import { FormUtil } from '../shared/form-util';
 
 @Component({
   selector: 'app-create-page',
   templateUrl: './create-page.component.html',
   styleUrls: ['./create-page.component.scss'],
 })
-export class CreatePageComponent implements OnInit {
+export class CreatePageComponent extends FormUtil {
   form = new FormGroup({
     title: new FormControl(null, [Validators.required]),
     text: new FormControl(null, [Validators.required]),
     author: new FormControl(null, [Validators.required]),
   });
 
-  constructor(
-    private postsService: PostsService,
-    private alert: AlertService
-  ) {}
-
-  ngOnInit(): void {}
-
-  isFieldInvalid(field: AbstractControl | null): boolean {
-    return Boolean(field?.touched && field?.invalid);
-  }
-
-  getFieldErrorValue(field: AbstractControl | null, key: string): any {
-    return field?.errors?.[key];
+  constructor(private postsService: PostsService, private alert: AlertService) {
+    super();
   }
 
   submit(): void {
@@ -56,15 +42,15 @@ export class CreatePageComponent implements OnInit {
     });
   }
 
-  get titleField(): AbstractControl | null {
+  get titleField(): FieldType {
     return this.form.get('title');
   }
 
-  get textField(): AbstractControl | null {
+  get textField(): FieldType {
     return this.form.get('text');
   }
 
-  get authorField(): AbstractControl | null {
+  get authorField(): FieldType {
     return this.form.get('author');
   }
 }

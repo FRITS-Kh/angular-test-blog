@@ -1,20 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  AbstractControl,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { User } from 'src/app/shared/interfaces';
 import { AuthService } from '../shared/services/auth.service';
+import { FieldType } from '../shared/types';
+import { FormUtil } from '../shared/form-util';
 
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.scss'],
 })
-export class LoginPageComponent implements OnInit {
+export class LoginPageComponent extends FormUtil implements OnInit {
   form = new FormGroup({
     email: new FormControl(null, [Validators.required, Validators.email]),
     password: new FormControl(null, [
@@ -29,7 +26,9 @@ export class LoginPageComponent implements OnInit {
     public auth: AuthService,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params: Params) => {
@@ -67,18 +66,10 @@ export class LoginPageComponent implements OnInit {
     });
   }
 
-  isFieldInvalid(field: AbstractControl | null): boolean {
-    return Boolean(field?.touched && field?.invalid);
-  }
-
-  getFieldErrorValue(field: AbstractControl | null, key: string): any {
-    return field?.errors?.[key];
-  }
-
-  get emailField(): AbstractControl | null {
+  get emailField(): FieldType {
     return this.form.get('email');
   }
-  get passwordField(): AbstractControl | null {
+  get passwordField(): FieldType {
     return this.form.get('password');
   }
 }
