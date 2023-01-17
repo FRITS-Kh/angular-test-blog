@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Post } from 'src/app/shared/interfaces';
 import { PostsService } from 'src/app/shared/posts.service';
 import { AlertService } from '../shared/services/alert.service';
@@ -12,10 +12,10 @@ import { FormUtil } from '../shared/form-util';
   styleUrls: ['./create-page.component.scss'],
 })
 export class CreatePageComponent extends FormUtil {
-  form = new FormGroup({
-    title: new FormControl(null, [Validators.required]),
-    text: new FormControl(null, [Validators.required]),
-    author: new FormControl(null, [Validators.required]),
+  form = new UntypedFormGroup({
+    title: new UntypedFormControl(null, [Validators.required]),
+    text: new UntypedFormControl(null, [Validators.required]),
+    author: new UntypedFormControl(null, [Validators.required]),
   });
 
   constructor(private postsService: PostsService, private alert: AlertService) {

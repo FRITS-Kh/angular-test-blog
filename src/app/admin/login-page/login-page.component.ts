@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { User } from 'src/app/shared/interfaces';
 import { AuthService } from '../shared/services/auth.service';
@@ -12,9 +12,9 @@ import { FormUtil } from '../shared/form-util';
   styleUrls: ['./login-page.component.scss'],
 })
 export class LoginPageComponent extends FormUtil implements OnInit {
-  form = new FormGroup({
-    email: new FormControl(null, [Validators.required, Validators.email]),
-    password: new FormControl(null, [
+  form = new UntypedFormGroup({
+    email: new UntypedFormControl(null, [Validators.required, Validators.email]),
+    password: new UntypedFormControl(null, [
       Validators.required,
       Validators.minLength(6),
     ]),

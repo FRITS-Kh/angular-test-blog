@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription, switchMap } from 'rxjs';
 import { Post } from 'src/app/shared/interfaces';
@@ -14,7 +14,7 @@ import { FormUtil } from '../shared/form-util';
   styleUrls: ['./edit-page.component.scss'],
 })
 export class EditPageComponent extends FormUtil implements OnInit, OnDestroy {
-  form!: FormGroup;
+  form!: UntypedFormGroup;
   post!: Post;
   submitted = false;
   updateSubscription!: Subscription;
@@ -35,9 +35,9 @@ export class EditPageComponent extends FormUtil implements OnInit, OnDestroy {
       .subscribe({
         next: (post: Post) => {
           this.post = post;
-          this.form = new FormGroup({
-            title: new FormControl(post.title, Validators.required),
-            text: new FormControl(post.text, Validators.required),
+          this.form = new UntypedFormGroup({
+            title: new UntypedFormControl(post.title, Validators.required),
+            text: new UntypedFormControl(post.text, Validators.required),
           });
         },
       });
