@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Observable, switchMap } from 'rxjs';
 import { Post } from '../shared/interfaces';
@@ -8,6 +8,7 @@ import { PostsService } from '../shared/posts.service';
   selector: 'app-post-page',
   templateUrl: './post-page.component.html',
   styleUrls: ['./post-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PostPageComponent implements OnInit {
   post$!: Observable<Post>;
