@@ -1,11 +1,8 @@
 <div *ngIf="form; else loading">
   <form [formGroup]="form" (ngSubmit)="submit()">
-    <div
-      [ngClass]="{
+    <div [ngClass]="{
         invalid: isFieldInvalid(titleField)
-      }"
-      class="form-control"
-    >
+      }" class="form-control">
       <label for="title">Post title:</label>
       <input formControlName="title" type="text" name="title" id="title" />
       <div *ngIf="isFieldInvalid(titleField)" class="validation">
@@ -15,12 +12,9 @@
       </div>
     </div>
 
-    <div
-      [ngClass]="{
+    <div [ngClass]="{
         invalid: isFieldInvalid(textField)
-      }"
-      class="form-control"
-    >
+      }" class="form-control">
       <label for="">Post content:</label>
       <quill-editor formControlName="text"></quill-editor>
       <div *ngIf="isFieldInvalid(textField)" class="validation">
@@ -29,14 +23,12 @@
         </small>
       </div>
     </div>
-
-    <button
-      class="btn btn-primary"
-      type="submit"
-      [disabled]="form.invalid || submitted"
-    >
-      Save
-    </button>
+    <div class="actions">
+      <button routerLink="/admin/dashboard" class="btn btn-light">Back</button>
+      <button class="btn btn-primary btn-reverse" [disabled]="form.invalid || submitted">
+        Save
+      </button>
+    </div>
   </form>
 </div>
 

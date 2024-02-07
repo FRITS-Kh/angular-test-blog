@@ -105,6 +105,11 @@ img {
   transition: opacity 0.2s ease-in;
   outline: none;
 
+  &-reverse {
+    margin-left: 0.5rem;
+    margin-right: 0;
+  }
+
   &:disabled {
     cursor: not-allowed;
     background: var(--light-color);

@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   UntypedFormControl,
   UntypedFormGroup,
@@ -21,7 +16,6 @@ import { FormUtil } from '../shared/form-util';
   selector: 'app-edit-page',
   templateUrl: './edit-page.component.html',
   styleUrls: ['./edit-page.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditPageComponent extends FormUtil implements OnInit, OnDestroy {
   form!: UntypedFormGroup;
@@ -44,7 +38,7 @@ export class EditPageComponent extends FormUtil implements OnInit, OnDestroy {
       )
       .subscribe({
         next: (post: Post) => {
-          this.post = post;
+          this.post = { ...post };
           this.form = new UntypedFormGroup({
             title: new UntypedFormControl(post.title, Validators.required),
             text: new UntypedFormControl(post.text, Validators.required),

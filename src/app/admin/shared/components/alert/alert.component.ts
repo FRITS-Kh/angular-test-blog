@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AlertService, AlertType } from '../../services/alert.service';
 
@@ -12,7 +6,6 @@ import { AlertService, AlertType } from '../../services/alert.service';
   selector: 'app-alert',
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AlertComponent implements OnInit, OnDestroy {
   @Input() delay = 5000;

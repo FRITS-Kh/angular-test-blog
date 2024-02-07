@@ -19,10 +19,7 @@
         <td>{{ post.title }}</td>
         <td>{{ post.date | date: "MMM d, y, HH:mm:ss" }}</td>
         <td>
-          <button
-            class="btn btn-link"
-            [routerLink]="['/admin', 'post', post.id, 'edit']"
-          >
+          <button class="btn btn-link" [routerLink]="['/admin', 'post', post.id, 'edit']">
             View
           </button>
           <a (click)="remove(post.id!, post.title)">Remove</a>
